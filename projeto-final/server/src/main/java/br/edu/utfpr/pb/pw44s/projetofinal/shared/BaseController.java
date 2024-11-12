@@ -1,6 +1,7 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.shared;
 
-import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.io.Serializable;
 
@@ -12,22 +13,21 @@ import java.io.Serializable;
  */
 public abstract class BaseController<ID extends Serializable, E  extends Identifiable<ID>, D> {
 
-    protected final ModelMapper modelMapper;
-
-    private final Class<E> entityClass;
-    private final Class<D> dtoClass;
+    private final DTOUtils<ID, E, D> dtoUtils;
 
     public BaseController(Class<E> entityClass, Class<D> dtoClass) {
-        this.entityClass = entityClass;
-        this.dtoClass = dtoClass;
-        this.modelMapper = new ModelMapper();
+        this.dtoUtils = new DTOUtils<>(entityClass, dtoClass);
     }
 
     public D toDto(E entity) {
-        return modelMapper.map(entity, dtoClass);
+        return dtoUtils.toDto(entity);
     }
 
     public E toEntity(D dto) {
-        return modelMapper.map(dto, entityClass);
+        return dtoUtils.toEntity(dto);
+    }
+
+    public Page<D> toPageDTO(Page<E> page, Pageable pageable) {
+        return dtoUtils.toPageDTO(page, pageable);
     }
 }

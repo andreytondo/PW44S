@@ -1,6 +1,10 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.shared;
 
+import br.edu.utfpr.pb.pw44s.projetofinal.search.SearchHandler;
+import br.edu.utfpr.pb.pw44s.projetofinal.search.request.SearchRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.io.Serializable;
 import java.util.Optional;
@@ -20,5 +24,13 @@ public abstract class CrudService<ID extends Serializable, E  extends Identifiab
 
     public void deleteById(ID id) {
         repository.deleteById(id);
+    }
+
+    public JpaSpecificationExecutor<E> getSpecExecutor() {
+        return null;
+    }
+
+    public Page<E> search(SearchRequest request) {
+        return new SearchHandler<>(getSpecExecutor()).handle(request);
     }
 }

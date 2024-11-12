@@ -18,7 +18,7 @@ class CategoryControllerTest extends CrudControllerTest<Long, Category, Category
 
     @Override
     protected CategoryDTO createInvalidObject() {
-        return new CategoryDTO(null, "teste");
+        return new CategoryDTO(null, null);
     }
 
     @Override

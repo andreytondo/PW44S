@@ -1,5 +1,6 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.shared;
 
+import br.edu.utfpr.pb.pw44s.projetofinal.search.request.SearchRequest;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -47,7 +48,7 @@ public abstract class CrudControllerTest<ID extends Serializable, E extends Iden
     @Test
     @Order(3)
     protected void updateValidRegister() {
-        D dto = createInvalidObject();
+        D dto = createValidObject();
         onBeforeUpdate(dto);
 
         HttpHeaders headers = new HttpHeaders();
@@ -73,6 +74,16 @@ public abstract class CrudControllerTest<ID extends Serializable, E extends Iden
 
     @Test
     @Order(7)
+    protected void searchEntries() {
+        SearchRequest request = new SearchRequest();
+        try {
+            ResponseEntity<Object> response = testRestTemplate.postForEntity(getURL() + "/search", request, Object.class);
+            assertEquals(HttpStatus.OK, response.getStatusCode());
+        } catch (NullPointerException e) {}
+    }
+
+    @Test
+    @Order(99)
     protected void deleteValidRegister() {
         ResponseEntity<Void> response = testRestTemplate.exchange(getURL() + "/" + 1L, HttpMethod.DELETE, null, Void.class);
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());

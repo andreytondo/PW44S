@@ -1,6 +1,9 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.shared;
 
+import br.edu.utfpr.pb.pw44s.projetofinal.search.SearchHandler;
+import br.edu.utfpr.pb.pw44s.projetofinal.search.request.SearchRequest;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,5 +52,11 @@ public abstract class CrudController<ID extends Serializable, E extends Identifi
     public ResponseEntity<Void> deleteById(@PathVariable ID id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<Page<D>> search(@RequestBody @Valid SearchRequest request) {
+        Page<D> page = toPageDTO(service.search(request), SearchHandler.getPageable(request));
+        return ResponseEntity.ok(page);
     }
 }
