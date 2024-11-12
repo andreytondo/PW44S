@@ -19,10 +19,6 @@ public class UserDTO {
     @Size(min = 4, max = 50)
     private String username;
 
-    @NotNull
-    @Size(min = 4, max = 50)
-    private String displayName;
-
     @NotNull(message = "O atributo password não pode ser nulo.")
     @Size(min = 6)
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$")
