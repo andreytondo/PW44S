@@ -1,12 +1,10 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.shared;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.Optional;
 
-@Service
 public abstract class CrudService<ID extends Serializable, E  extends Identifiable<ID>, R extends CrudRepository<ID, E>> {
 
     @Autowired
