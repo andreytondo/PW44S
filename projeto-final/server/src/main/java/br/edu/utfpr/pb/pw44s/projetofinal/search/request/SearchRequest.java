@@ -14,8 +14,15 @@ import java.util.List;
 @NoArgsConstructor
 public class SearchRequest {
 
+    @Builder.Default
     private List<SearchFilter> filters = new ArrayList<>();
-    private SearchSort sort;
+
+    @Builder.Default
+    private SearchSort sort = new SearchSort("id", SearchSort.Type.ASC);
+
+    @Builder.Default
     private Integer page = 0;
+
+    @Builder.Default
     private Integer rows = 50;
 }

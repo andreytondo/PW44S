@@ -1,10 +1,9 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.controller;
 
 import br.edu.utfpr.pb.pw44s.projetofinal.dto.CategoryDTO;
-import br.edu.utfpr.pb.pw44s.projetofinal.model.Category;
 import br.edu.utfpr.pb.pw44s.projetofinal.shared.CrudControllerTest;
 
-class CategoryControllerTest extends CrudControllerTest<Long, Category, CategoryDTO> {
+class CategoryControllerTest extends CrudControllerTest<CategoryDTO> {
 
     @Override
     protected String getURL() {

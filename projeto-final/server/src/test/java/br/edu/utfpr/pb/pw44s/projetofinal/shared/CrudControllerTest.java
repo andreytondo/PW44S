@@ -9,13 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
 
-import java.io.Serializable;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @ApplicationTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public abstract class CrudControllerTest<ID extends Serializable, E extends Identifiable<ID>, D> {
+public abstract class CrudControllerTest<D> {
 
     @Autowired
     protected TestRestTemplate testRestTemplate;
@@ -24,6 +22,10 @@ public abstract class CrudControllerTest<ID extends Serializable, E extends Iden
     protected abstract D createValidObject();
     protected abstract D createInvalidObject();
     protected abstract void onBeforeUpdate(D dto);
+
+    protected SearchRequest createSearchRequest() {
+        return new SearchRequest();
+    }
 
     @Test
     @Order(1)
@@ -75,11 +77,9 @@ public abstract class CrudControllerTest<ID extends Serializable, E extends Iden
     @Test
     @Order(7)
     protected void searchEntries() {
-        SearchRequest request = new SearchRequest();
-        try {
-            ResponseEntity<Object> response = testRestTemplate.postForEntity(getURL() + "/search", request, Object.class);
-            assertEquals(HttpStatus.OK, response.getStatusCode());
-        } catch (NullPointerException e) {}
+        SearchRequest request = createSearchRequest();
+        ResponseEntity<Object> response = testRestTemplate.postForEntity(getURL() + "/search", request, Object.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test

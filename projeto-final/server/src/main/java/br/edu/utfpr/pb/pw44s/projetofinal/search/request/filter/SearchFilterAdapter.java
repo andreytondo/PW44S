@@ -17,7 +17,7 @@ public class SearchFilterAdapter implements Specification {
     @Override
     @SuppressWarnings("unchecked")
     public Predicate toPredicate(Root root, CriteriaQuery query, CriteriaBuilder cb) {
-        Expression field = root.get(filter.getField());
+        Expression field = root.get(mapField(filter.getField()));
         Object value = filter.getValue();
         return switch (filter.getType()) {
             case EQUALS -> cb.equal(field, value);
@@ -41,5 +41,10 @@ public class SearchFilterAdapter implements Specification {
                 );
             }
         };
+    }
+
+    String mapField(String field) {
+        String[] path = field.split("\\.");
+        return path[path.length - 1];
     }
 }

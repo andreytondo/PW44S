@@ -17,7 +17,7 @@ public class SearchSortAdapter {
      * @return Sort object - unsorted
      */
     public static Sort defaultSort() {
-        return Sort.unsorted();
+        return Sort.by(Sort.Order.asc("id"));
     }
 
     public static Sort byType(SearchSort.Type type, String field) {

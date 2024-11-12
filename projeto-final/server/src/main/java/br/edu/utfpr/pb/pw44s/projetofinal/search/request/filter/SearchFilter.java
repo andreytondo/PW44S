@@ -1,10 +1,8 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.search.request.filter;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@Builder
 @Getter
 @Setter
 @AllArgsConstructor
