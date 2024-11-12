@@ -26,7 +26,12 @@ public class Product implements Identifiable<Long> {
     @NotNull(message = "O nome do produto não pode ser nulo")
     private String name;
 
-    @Min(value = 0, message = "A quantidade do produto não pode ser negativa")
+    @NotNull(message = "A descrição do produto não pode ser nula")
+    private String description;
+
+    private String image;
+
+    @Min(value = 0, message = "O preço do produto não pode ser negativo")
     @NotNull(message = "O preço do produto não pode ser nulo")
     private Double price;
 
