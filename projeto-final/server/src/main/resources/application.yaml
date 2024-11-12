@@ -1,13 +1,16 @@
+server:
+  port: ${PORT:8080}
 spring:
+  config:
+    name: ${APP_NAME:""}
   application:
-    name: server
+    name: ${APP_NAME:""}
   datasource:
-    generate-unique-name: false
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
-    show-sql: true
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+      ddl-auto: update
+    show-sql: false
