@@ -1,9 +1,7 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.repository;
 
 import br.edu.utfpr.pb.pw44s.projetofinal.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import br.edu.utfpr.pb.pw44s.projetofinal.shared.CrudRepository;
 
-@Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends CrudRepository<Long, User> {
 }

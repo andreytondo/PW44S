@@ -3,6 +3,10 @@ spring:
     name: server
   datasource:
     generate-unique-name: false
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
   h2:
     console:
       enabled: true

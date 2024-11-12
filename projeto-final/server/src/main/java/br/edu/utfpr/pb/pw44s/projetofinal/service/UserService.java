@@ -2,22 +2,21 @@ package br.edu.utfpr.pb.pw44s.projetofinal.service;
 
 import br.edu.utfpr.pb.pw44s.projetofinal.model.User;
 import br.edu.utfpr.pb.pw44s.projetofinal.repository.UserRepository;
+import br.edu.utfpr.pb.pw44s.projetofinal.shared.CrudService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
+public class UserService extends CrudService<Long, User, UserRepository> {
 
-    private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserService() {
         this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
     }
 
     public User save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        return repository.save(user);
     }
 }

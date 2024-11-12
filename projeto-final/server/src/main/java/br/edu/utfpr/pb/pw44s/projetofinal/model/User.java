@@ -1,5 +1,6 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.model;
 
+import br.edu.utfpr.pb.pw44s.projetofinal.shared.Identifiable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -18,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User implements UserDetails {
+public class User implements UserDetails, Identifiable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +33,7 @@ public class User implements UserDetails {
     @Size(min = 4, max = 50)
     private String displayName;
 
-    @NotNull
+    @NotNull(message = "O atributo password não pode ser nulo.")
     @Size(min = 6)
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$")
     private String password;
