@@ -1,9 +1,6 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.dto;
 
 import br.edu.utfpr.pb.pw44s.projetofinal.model.OrderItem;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDTO {
-
 
     private Long id;
 

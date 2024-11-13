@@ -23,10 +23,10 @@ public class Order implements Identifiable<Long> {
     private Long id;
 
     @NotNull(message = "O id do usuário não pode ser nulo")
-    private Long userId;
+    private User userId;
 
     @NotNull(message = "O id do endereço não pode ser nulo")
-    private Long addressId;
+    private Address addressId;
 
     @NotNull
     private List<OrderItem> items;

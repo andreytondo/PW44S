@@ -23,10 +23,10 @@ public class OrderItem implements Identifiable<Long> {
     private Long id;
 
     @NotNull(message = "O id do pedido não pode ser nulo")
-    private Long orderId;
+    private Order orderId;
 
     @NotNull(message = "O id do produto não pode ser nulo")
-    private Long productId;
+    private Product productId;
 
     @NotNull(message = "A quantidade do produto não pode ser nula")
     @Min(value = 1, message = "A quantidade do produto não pode ser menor que 1")
