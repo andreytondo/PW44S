@@ -20,7 +20,9 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler({ConstraintViolationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public RestWarnException handlerSQLException(ConstraintViolationException exception, HttpServletRequest request) {
-        return new RestWarnException(HttpStatus.BAD_REQUEST.value(), "Erro ao realizar o registro no banco de dados", request.getServletPath(), null);
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", exception.getMessage());
+        return new RestWarnException(HttpStatus.BAD_REQUEST.value(), "Erro ao realizar o registro no banco de dados", request.getServletPath(), errors);
     }
 
     @ExceptionHandler({DataIntegrityViolationException.class})

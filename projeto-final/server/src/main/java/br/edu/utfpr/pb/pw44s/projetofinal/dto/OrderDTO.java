@@ -2,16 +2,14 @@ package br.edu.utfpr.pb.pw44s.projetofinal.dto;
 
 import br.edu.utfpr.pb.pw44s.projetofinal.model.OrderItem;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDTO {

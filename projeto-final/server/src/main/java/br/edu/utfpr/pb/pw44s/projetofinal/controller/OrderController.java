@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("orders")
 public class OrderController extends CrudController<Long, Order, OrderDTO, OrderRepository, OrderService> {
-    public OrderController(Class<Order> entityClass, Class<OrderDTO> dtoClass) {
-        super(entityClass, dtoClass);
+
+    public OrderController() {
+        super(Order.class, OrderDTO.class);
     }
 }

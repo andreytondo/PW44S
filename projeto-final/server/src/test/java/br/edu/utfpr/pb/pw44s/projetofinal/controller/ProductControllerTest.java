@@ -39,22 +39,20 @@ public class ProductControllerTest extends CrudControllerTest<ProductDTO> {
 
     @Override
     protected ProductDTO createValidObject() {
-        ProductDTO productDTO = new ProductDTO();
-        productDTO.setName("Teste");
-        productDTO.setPrice(10.0);
-
-        List<CategoryDTO> categories = List.of(new CategoryDTO(category.getId(), category.getName()));
-        productDTO.setCategories(categories);
-
-        return productDTO;
+        return ProductDTO.builder()
+                .name("Teste")
+                .price(10.0)
+                .description("Teste")
+                .categories(List.of(new CategoryDTO(category.getId(), category.getName())))
+                .build();
     }
 
     @Override
     protected ProductDTO createInvalidObject() {
-        ProductDTO productDTO = new ProductDTO();
-        productDTO.setName("Teste");
-        productDTO.setPrice(-1.0);
-        return productDTO;
+        return ProductDTO.builder()
+                .name("Teste")
+                .price(-10.0)
+                .build();
     }
 
     @Override

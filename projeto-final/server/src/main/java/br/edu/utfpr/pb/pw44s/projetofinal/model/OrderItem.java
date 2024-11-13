@@ -22,11 +22,13 @@ public class OrderItem implements Identifiable<Long> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
     @NotNull(message = "O id do pedido não pode ser nulo")
-    private Order orderId;
+    private Order order;
 
+    @ManyToOne
     @NotNull(message = "O id do produto não pode ser nulo")
-    private Product productId;
+    private Product product;
 
     @NotNull(message = "A quantidade do produto não pode ser nula")
     @Min(value = 1, message = "A quantidade do produto não pode ser menor que 1")

@@ -18,17 +18,21 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order implements Identifiable<Long> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
     @NotNull(message = "O id do usuário não pode ser nulo")
-    private User userId;
+    private User user;
 
+    @ManyToOne
     @NotNull(message = "O id do endereço não pode ser nulo")
-    private Address addressId;
+    private Address address;
 
     @NotNull
+    @OneToMany(mappedBy = "order")
     private List<OrderItem> items;
 
     @NotNull(message = "O total não pode ser nulo")
