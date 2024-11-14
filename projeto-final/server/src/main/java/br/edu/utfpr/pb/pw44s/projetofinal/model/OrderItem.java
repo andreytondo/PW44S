@@ -26,7 +26,7 @@ public class OrderItem implements Identifiable<Long> {
     @NotNull(message = "O id do pedido não pode ser nulo")
     private Order order;
 
-    @ManyToOne
+    @OneToMany
     @NotNull(message = "O id do produto não pode ser nulo")
     private Product product;
 

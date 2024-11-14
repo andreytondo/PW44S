@@ -13,7 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ApplicationTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public abstract class CrudControllerTest<D> {
+public abstract class
+CrudControllerTest<D> {
 
     @Autowired
     protected TestRestTemplate testRestTemplate;

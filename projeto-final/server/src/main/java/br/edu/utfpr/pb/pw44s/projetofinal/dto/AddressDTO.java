@@ -1,8 +1,10 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.dto;
 
+import br.edu.utfpr.pb.pw44s.projetofinal.model.User;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +20,8 @@ public class AddressDTO {
     private Long id;
 
     @NotNull(message = "O id do usuário não pode ser nulo")
-    private Long userId;
+    @ManyToOne
+    private User user;
 
     @NotNull(message = "O nome da rua não pode ser nulo")
     private String street;

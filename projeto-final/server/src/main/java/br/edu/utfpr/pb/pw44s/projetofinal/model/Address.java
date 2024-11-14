@@ -20,7 +20,8 @@ public class Address implements Identifiable<Long> {
     private Long id;
 
     @NotNull(message = "O id do usuário não pode ser nulo")
-    private Long userId;
+    @ManyToOne
+    private User user;
 
     @NotNull(message = "O nome da rua não pode ser nulo")
     private String street;

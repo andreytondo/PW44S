@@ -1,6 +1,10 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.dto;
 
+import br.edu.utfpr.pb.pw44s.projetofinal.model.Address;
 import br.edu.utfpr.pb.pw44s.projetofinal.model.OrderItem;
+import br.edu.utfpr.pb.pw44s.projetofinal.model.User;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -17,12 +21,15 @@ public class OrderDTO {
     private Long id;
 
     @NotNull(message = "O id do usuário não pode ser nulo")
-    private Long userId;
+    @ManyToOne
+    private User user;
 
+    @ManyToOne
     @NotNull(message = "O id do endereço não pode ser nulo")
-    private Long addressId;
+    private Address address;
 
     @NotNull
+    @OneToMany(mappedBy = "order")
     private List<OrderItem> items;
 
     @NotNull(message = "O total não pode ser nulo")
