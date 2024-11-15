@@ -1,9 +1,7 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.dto;
 
-import br.edu.utfpr.pb.pw44s.projetofinal.model.Address;
+import br.edu.utfpr.pb.pw44s.projetofinal.enums.OrderStatus;
 import br.edu.utfpr.pb.pw44s.projetofinal.model.OrderItem;
-import br.edu.utfpr.pb.pw44s.projetofinal.model.User;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -21,12 +19,10 @@ public class OrderDTO {
     private Long id;
 
     @NotNull(message = "O id do usuário não pode ser nulo")
-    @ManyToOne
-    private User user;
+    private UserDTO user;
 
-    @ManyToOne
     @NotNull(message = "O id do endereço não pode ser nulo")
-    private Address address;
+    private AddressDTO address;
 
     @NotNull
     @OneToMany(mappedBy = "order")
@@ -36,7 +32,7 @@ public class OrderDTO {
     private Double total;
 
     @NotNull(message = "O status não pode ser nulo")
-    private String status;
+    private OrderStatus status;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

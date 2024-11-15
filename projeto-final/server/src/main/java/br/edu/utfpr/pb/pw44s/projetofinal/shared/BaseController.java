@@ -1,5 +1,6 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.shared;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -17,6 +18,11 @@ public abstract class BaseController<ID extends Serializable, E  extends Identif
 
     public BaseController(Class<E> entityClass, Class<D> dtoClass) {
         this.dtoUtils = new DTOUtils<>(entityClass, dtoClass);
+        customizeMapping();
+    }
+
+    public ModelMapper getModelMapper() {
+        return dtoUtils.getModelMapper();
     }
 
     public D toDto(E entity) {
@@ -30,4 +36,6 @@ public abstract class BaseController<ID extends Serializable, E  extends Identif
     public Page<D> toPageDTO(Page<E> page, Pageable pageable) {
         return dtoUtils.toPageDTO(page, pageable);
     }
+
+    public void customizeMapping() {}
 }

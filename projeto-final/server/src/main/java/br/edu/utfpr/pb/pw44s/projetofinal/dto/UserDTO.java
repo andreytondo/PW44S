@@ -23,4 +23,8 @@ public class UserDTO {
     @Size(min = 6)
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$")
     private String password;
+
+    public UserDTO(Long id) {
+        this.id = id;
+    }
 }

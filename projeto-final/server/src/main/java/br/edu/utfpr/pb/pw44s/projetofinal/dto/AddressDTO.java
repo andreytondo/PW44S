@@ -41,4 +41,8 @@ public class AddressDTO {
     private String complement;
 
     private String neighborhood;
+
+    public AddressDTO(Long id) {
+        this.id = id;
+    }
 }

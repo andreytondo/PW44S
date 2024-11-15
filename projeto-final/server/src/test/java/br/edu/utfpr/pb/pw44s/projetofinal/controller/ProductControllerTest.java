@@ -31,7 +31,7 @@ public class ProductControllerTest extends CrudControllerTest<ProductDTO> {
     private Category category;
 
     @BeforeAll
-    void createCategory() {
+    void setUp() {
         category = new Category();
         category.setName("Teste");
         categoryService.save(category);

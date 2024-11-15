@@ -1,5 +1,6 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.model;
 
+import br.edu.utfpr.pb.pw44s.projetofinal.enums.OrderStatus;
 import br.edu.utfpr.pb.pw44s.projetofinal.shared.Identifiable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -38,8 +39,9 @@ public class Order implements Identifiable<Long> {
     @NotNull(message = "O total não pode ser nulo")
     private Double total;
 
+    @Enumerated(EnumType.STRING)
     @NotNull(message = "O status não pode ser nulo")
-    private String status;
+    private OrderStatus status;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

@@ -9,8 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "order_itens")
 @Getter
@@ -26,7 +24,7 @@ public class OrderItem implements Identifiable<Long> {
     @NotNull(message = "O id do pedido não pode ser nulo")
     private Order order;
 
-    @OneToMany
+    @ManyToOne
     @NotNull(message = "O id do produto não pode ser nulo")
     private Product product;
 
