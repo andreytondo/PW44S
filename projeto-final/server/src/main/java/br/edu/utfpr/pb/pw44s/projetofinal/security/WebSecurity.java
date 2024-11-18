@@ -49,6 +49,7 @@ public class WebSecurity {
         http.authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers(antMatcher(HttpMethod.POST, "/users/**")).permitAll()
                 .requestMatchers(antMatcher(HttpMethod.GET, "/products/**")).permitAll()
+                .requestMatchers(antMatcher(HttpMethod.POST, "/products/search")).permitAll()
                 .anyRequest().authenticated()
         );
 
