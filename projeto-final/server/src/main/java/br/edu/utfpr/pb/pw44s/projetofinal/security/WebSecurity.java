@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -43,14 +44,21 @@ public class WebSecurity {
         http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> corsConfigurationSource());
-
         http.exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(authenticationEntryPoint));
-
+        http.formLogin(Customizer.withDefaults());
         http.authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers(antMatcher(HttpMethod.POST, "/users/**")).permitAll()
                 .requestMatchers(antMatcher(HttpMethod.GET, "/products/**")).permitAll()
                 .anyRequest().authenticated()
         );
+
+        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
+
+        http.authenticationManager(authenticationManager)
+                .addFilter(new JWTAuthenticationFilter(authenticationManager, userService))
+                .addFilter(new JWTAuthorizationFilter(authenticationManager, userService))
+                .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
 
