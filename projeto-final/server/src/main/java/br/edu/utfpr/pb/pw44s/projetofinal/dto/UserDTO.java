@@ -18,12 +18,12 @@ public class UserDTO {
     private Long id;
 
     @NotNull(message = "O atributo username não pode ser nulo.")
-    @Size(min = 4, max = 50)
+    @Size(min = 4, max = 50, message = "O atributo username deve conter entre 4 e 50 caracteres.")
     private String username;
 
     @NotNull(message = "O atributo password não pode ser nulo.")
     @Size(min = 6)
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "A senha deve conter pelo menos uma letra minúscula, uma letra maiúscula e um número.")
     private String password;
 
     public UserDTO(Long id) {
