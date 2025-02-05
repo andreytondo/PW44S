@@ -35,7 +35,6 @@ public class Product implements Identifiable<Long> {
     @NotNull(message = "O preço do produto não pode ser nulo")
     private Double price;
 
-    @OneToMany
-    @JoinColumn(name = "category_id")
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Category> categories;
 }
