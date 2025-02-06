@@ -19,21 +19,21 @@ public class ExceptionHandlerAdvice {
 
     @ExceptionHandler({ConstraintViolationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public RestWarnException handlerSQLException(ConstraintViolationException exception, HttpServletRequest request) {
+    public WarnMessage handlerSQLException(ConstraintViolationException exception, HttpServletRequest request) {
         Map<String, String> errors = new HashMap<>();
         errors.put("message", exception.getMessage());
-        return new RestWarnException(HttpStatus.BAD_REQUEST.value(), "Erro ao realizar o registro no banco de dados", request.getServletPath(), errors);
+        return new WarnMessage(HttpStatus.BAD_REQUEST.value(), "Erro ao realizar o registro no banco de dados", request.getServletPath(), errors);
     }
 
     @ExceptionHandler({DataIntegrityViolationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public RestWarnException handlerSQLException(DataIntegrityViolationException exception, HttpServletRequest request) {
-        return new RestWarnException(HttpStatus.BAD_REQUEST.value(), "Erro na integridade dos dados", request.getServletPath(), null);
+    public WarnMessage handlerSQLException(DataIntegrityViolationException exception, HttpServletRequest request) {
+        return new WarnMessage(HttpStatus.BAD_REQUEST.value(), "Erro na integridade dos dados", request.getServletPath(), null);
     }
 
     @ExceptionHandler({MethodArgumentNotValidException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public RestWarnException handlerValidationException(MethodArgumentNotValidException exception, HttpServletRequest request) {
+    public WarnMessage handlerValidationException(MethodArgumentNotValidException exception, HttpServletRequest request) {
         BindingResult result = exception.getBindingResult();
 
         Map<String, String> validationErrors = new HashMap<>();
@@ -42,6 +42,14 @@ public class ExceptionHandlerAdvice {
             validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
 
-        return new RestWarnException(HttpStatus.BAD_REQUEST.value(), "Erro ao validar as informações!", request.getServletPath(), validationErrors);
+        return new WarnMessage(HttpStatus.BAD_REQUEST.value(), "Erro ao validar as informações!", request.getServletPath(), validationErrors);
+    }
+
+    @ExceptionHandler({WarnException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public WarnMessage handlerWarnException(WarnException exception, HttpServletRequest request) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", exception.getMessage());
+        return new WarnMessage(HttpStatus.BAD_REQUEST.value(), exception.getMessage(), request.getServletPath(), errors);
     }
 }

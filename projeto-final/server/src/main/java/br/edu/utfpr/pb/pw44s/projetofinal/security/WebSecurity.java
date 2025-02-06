@@ -50,6 +50,8 @@ public class WebSecurity {
                 .requestMatchers(antMatcher(HttpMethod.POST, "/users")).permitAll()
                 .requestMatchers(antMatcher(HttpMethod.GET, "/products/**")).permitAll()
                 .requestMatchers(antMatcher(HttpMethod.POST, "/products/search")).permitAll()
+                .requestMatchers(antMatcher(HttpMethod.GET, "/categories/**")).permitAll()
+                .requestMatchers(antMatcher(HttpMethod.POST, "/categories/search")).permitAll()
                 .anyRequest().authenticated()
         );
 

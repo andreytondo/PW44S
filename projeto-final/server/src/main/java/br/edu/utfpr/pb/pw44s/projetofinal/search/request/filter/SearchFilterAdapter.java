@@ -1,6 +1,8 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.search.request.filter;
 
+import br.edu.utfpr.pb.pw44s.projetofinal.exception.WarnException;
 import jakarta.persistence.criteria.*;
+import org.hibernate.query.sqm.PathElementException;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
@@ -10,6 +12,7 @@ public class SearchFilterAdapter implements Specification {
     private SearchFilter filter;
 
     public Predicate adapt(SearchFilter filter, Root root, CriteriaQuery query, CriteriaBuilder criteriaBuilder) {
+        query.distinct(true);
         this.filter = filter;
         return toPredicate(root, query, criteriaBuilder);
     }
@@ -43,12 +46,17 @@ public class SearchFilterAdapter implements Specification {
         };
     }
 
+
     Expression<?> getNestedField(Root<?> root, String fieldPath) {
         String[] path = fieldPath.split("\\.");
         Path<?> currentPath = root;
 
         for (String segment : path) {
-            currentPath = currentPath.get(segment);
+            try {
+                currentPath = currentPath.get(segment);
+            } catch (PathElementException e) {
+                throw new WarnException("Invalid field path", e);
+            }
         }
 
         return currentPath;

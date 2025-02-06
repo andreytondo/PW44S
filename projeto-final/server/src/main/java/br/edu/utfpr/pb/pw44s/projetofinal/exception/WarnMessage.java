@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Data
 @NoArgsConstructor
-public class RestWarnException {
+public class WarnMessage {
 
     private long timestamp = new Date().getTime();
     private int status;
@@ -16,7 +16,7 @@ public class RestWarnException {
     private String url;
     private Map<String, String> errors;
 
-    public RestWarnException(int status, String message, String url, Map<String, String> errors) {
+    public WarnMessage(int status, String message, String url, Map<String, String> errors) {
         this.status = status;
         this.message = message;
         this.url = url;
