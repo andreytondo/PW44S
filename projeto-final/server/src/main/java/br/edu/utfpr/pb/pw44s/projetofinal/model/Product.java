@@ -1,5 +1,7 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.model;
 
+import br.edu.utfpr.pb.pw44s.projetofinal.enums.Color;
+import br.edu.utfpr.pb.pw44s.projetofinal.enums.Size;
 import br.edu.utfpr.pb.pw44s.projetofinal.shared.Identifiable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
@@ -37,4 +39,10 @@ public class Product implements Identifiable<Long> {
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Category> categories;
+
+    @Enumerated(EnumType.STRING)
+    private Color color;
+
+    @Enumerated(EnumType.STRING)
+    private Size size;
 }
