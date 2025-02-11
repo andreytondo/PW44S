@@ -1,5 +1,8 @@
 package br.edu.utfpr.pb.pw44s.projetofinal.dto;
 
+import br.edu.utfpr.pb.pw44s.projetofinal.enums.Color;
+import br.edu.utfpr.pb.pw44s.projetofinal.enums.Size;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -28,4 +31,12 @@ public class ProductDTO {
     private String image;
 
     private List<CategoryDTO> categories;
+
+    private Color color;
+
+    private Size size;
+
+    @Min(value = 0, message = "A avaliação do produto não pode ser negativa")
+    @Max(value = 5, message = "A avaliação do produto não pode ser maior que 500")
+    private Double rating;
 }

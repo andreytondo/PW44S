@@ -4,6 +4,7 @@ import br.edu.utfpr.pb.pw44s.projetofinal.enums.Color;
 import br.edu.utfpr.pb.pw44s.projetofinal.enums.Size;
 import br.edu.utfpr.pb.pw44s.projetofinal.shared.Identifiable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -45,4 +46,8 @@ public class Product implements Identifiable<Long> {
 
     @Enumerated(EnumType.STRING)
     private Size size;
+
+    @Min(value = 0, message = "A avaliação do produto não pode ser negativa")
+    @Max(value = 5, message = "A avaliação do produto não pode ser maior que 500")
+    private Double rating;
 }
