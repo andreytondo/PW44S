@@ -18,10 +18,10 @@ public class OrderDTO {
 
     private Long id;
 
-    @NotNull(message = "O id do usuário não pode ser nulo")
+//    @NotNull(message = "O id do usuário não pode ser nulo")
     private UserDTO user;
 
-    @NotNull(message = "O id do endereço não pode ser nulo")
+//    @NotNull(message = "O id do endereço não pode ser nulo")
     private AddressDTO address;
 
     @NotNull

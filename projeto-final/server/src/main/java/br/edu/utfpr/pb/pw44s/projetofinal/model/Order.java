@@ -25,11 +25,11 @@ public class Order implements Identifiable<Long> {
     private Long id;
 
     @ManyToOne
-    @NotNull(message = "O id do usuário não pode ser nulo")
+//    @NotNull(message = "O id do usuário não pode ser nulo")
     private User user;
 
     @ManyToOne
-    @NotNull(message = "O id do endereço não pode ser nulo")
+//    @NotNull(message = "O endereço não pode ser nulo")
     private Address address;
 
     @NotNull
